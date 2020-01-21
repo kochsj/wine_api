@@ -6,3 +6,6 @@ from .serializers import BottleSerializer
 class BottleList(generics.ListCreateAPIView):
     queryset = Bottle.objects.all()
     serializer_class = BottleSerializer
+
+# class BottleListDetail(generics.ListCreateAPIView):
+#     queryset = Bottle.objects.filter('pk')
