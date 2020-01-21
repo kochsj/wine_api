@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 import datetime
 
 def year_choices(current):
@@ -31,11 +32,13 @@ class Bottle(models.Model):
         (SHI, 'Shiraz/Syrah'),
         (ZIN, 'Zinfandel'),
     ]
-    User = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
     Winery = models.CharField(max_length=128)
     Grape = models.CharField(choices=GRAPE_CHOICES, default=CAB, max_length=20)
     Year = models.IntegerField(choices=YEAR_CHOICES, default=current_year)
     Description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     # Image = models.ImageField(upload_to='static/', blank=True)
 
     def __str__(self):
